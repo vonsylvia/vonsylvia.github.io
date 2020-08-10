@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>MySQL基础语法 - Mike&#039;s Blog</title><meta description="读《MySQL必知必会》学习MySQL基础语法，记录一下"><meta property="og:type" content="blog"><meta property="og:title" content="MySQL基础语法"><meta property="og:url" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><meta property="og:site_name" content="Mike&#039;s Blog"><meta property="og:description" content="读《MySQL必知必会》学习MySQL基础语法，记录一下"><meta property="og:locale" content="zh_TW"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230749785.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230916109.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323232643341.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324211214462.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324211742187.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324221904401.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324222324856.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324223830721.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324224918322.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324225112285.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324225653870.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325154457128.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325155122536.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325202123235.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325205515719.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325205805757.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195327166.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195506231.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195650035.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328200233496.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328200302936.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328201704047.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328201933837.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328204647343.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205045949.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205431822.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205731631.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210030128.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210048635.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210132863.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210502461.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210549211.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210730463.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329195706190.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329200627534.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329201917242.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204223193.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204814361.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204824576.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329205451281.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329210101456.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329210223892.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329213009284.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329213445348.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330201509011.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330201704552.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330203032468.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330204247198.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330204644511.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330205041320.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330211434750.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331211416300.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331211722811.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331212939908.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331212655520.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213333442.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213832392.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213903694.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331220024640.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401204933065.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401210547903.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401211128130.png"><meta property="og:image" content="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401211827954.png"><meta property="article:published_time" content="2020-06-10T12:54:34.000Z"><meta property="article:modified_time" content="2020-08-10T08:24:39.262Z"><meta property="article:author" content="VONSYLVIA"><meta property="article:tag" content="MySQL"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230749785.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"},"headline":"Mike's Blog","image":["http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230749785.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230916109.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323232643341.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324211214462.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324211742187.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324221904401.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324222324856.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324223830721.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324224918322.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324225112285.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324225653870.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325154457128.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325155122536.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325202123235.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325205515719.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325205805757.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195327166.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195506231.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195650035.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328200233496.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328200302936.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328201704047.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328201933837.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328204647343.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205045949.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205431822.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205731631.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210030128.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210048635.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210132863.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210502461.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210549211.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210730463.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329195706190.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329200627534.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329201917242.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204223193.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204814361.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204824576.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329205451281.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329210101456.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329210223892.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329213009284.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329213445348.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330201509011.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330201704552.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330203032468.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330204247198.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330204644511.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330205041320.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330211434750.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331211416300.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331211722811.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331212939908.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331212655520.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213333442.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213832392.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213903694.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331220024640.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401204933065.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401210547903.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401211128130.png","http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401211827954.png"],"datePublished":"2020-06-10T12:54:34.000Z","dateModified":"2020-08-10T08:24:39.262Z","author":{"@type":"Person","name":"VONSYLVIA"},"description":"读《MySQL必知必会》学习MySQL基础语法，记录一下"}</script><link rel="canonical" href="http://yoursite.com/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Mike&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/vonsylvia"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜尋" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2020-06-10T12:54:34.000Z" title="2020-06-10T12:54:34.000Z">2020-06-10</time><span class="level-item"><a class="link-muted" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span><span class="level-item">39 分鐘 閱讀文 (大約 5859 個字)</span></div></div><h1 class="title is-3 is-size-4-mobile">MySQL基础语法</h1><div class="content"><p>读《MySQL必知必会》学习MySQL基础语法，记录一下</p>
+<a id="more"></a>
+
+<h2 id="USE"><a href="#USE" class="headerlink" title="USE"></a>USE</h2><ul>
+<li>使用crashcourse数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE crashcourse;</span><br></pre></td></tr></table></figure>
+
+<p>USE语句不返回任何结果。</p>
+<h2 id="SHOW"><a href="#SHOW" class="headerlink" title="SHOW"></a>SHOW</h2><ul>
+<li>显示数据库名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW DATABASES;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230749785.png"></p>
+<ul>
+<li>显示当前选择的数据库内可用表的列表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW TABLES;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323230916109.png"></p>
+<ul>
+<li>给出表名，对每个字段返回一行，行中包含字段名、数据类型、是否允许NULL、键信息、默认值以及其他信息（如字段cust_id的auto_increment）  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW COLUMNS FROM customers;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200323232643341.png"></p>
+<p><strong>NOTE：自动增量auto_increment</strong></p>
+<p>某些表列需要唯一值。  在每个行添加到表中时， MySQL可以自动地为每个行分配下一个可用编号，不用在添加一行时手动分配唯一值（这样做必须记住最后一次使用的值） 。如果需要它，则必须在用CREATE语句创建表时把它作为表定义的组成部分。  </p>
+<p><strong>其他SHOW语句：</strong></p>
+<ul>
+<li>SHOW STATUS，用于显示广泛的服务器状态信息；  </li>
+<li>SHOW CREATE DATABASE和SHOW CREATE TABLE，分别用来显示创建特定数据库或表的MySQL语句；  </li>
+<li>SHOW GRANTS，用来显示授予用户（所有用户或特定用户）的安全权限；  </li>
+<li>SHOW ERRORS和SHOW WARNINGS， 用来显示服务器错误或警告消息。  </li>
+</ul>
+<h2 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h2><ul>
+<li>用SELECT语句从products表中检索一个名为prod_name的列 （如果没有明确排序查询结果 ，则返回的数据的顺序没有特殊意义 ）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324211214462.png"></p>
+<ul>
+<li>从products表中选择3列</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_name, prod_price</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324211742187.png"></p>
+<ul>
+<li>检索所有列</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>检索不同的行，只返回不同的vend_id行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT vend_id</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324221904401.png"></p>
+<h2 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h2><ul>
+<li>限制结果。使用LIMIT 5返回不多于5行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">LIMIT 5;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324222324856.png"></p>
+<p><strong>NOTE：LIMIT</strong></p>
+<ul>
+<li>为得出下一个5行，可以指定开始行和行数，如<code>LIMIT 5,5</code>，表示从行5开始的5行。第一个数为开始位置，第二个数为要检索的行数。  </li>
+<li>行0：检索出来的第一行为行0而不是行1。因此， LIMIT 1, 1将检索出第二行而不是第一行。 </li>
+<li>在行数不够时 ，MySQL将只返回它能返回的那么多行  </li>
+</ul>
+<ul>
+<li>使用完全限定的表名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT products.prod_name</span><br><span class="line">FROM crashcourse.products;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h2><ul>
+<li>使用<code>ORDER BY</code>子句取一个或多个列的名字，据此对输出进行排序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324223830721.png"></p>
+<ul>
+<li>按多个列排序。检索3个列，并按其中两个列对结果进行排序，首先按价格，然后再按名称排序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_price, prod_name</span><br><span class="line">FROM products</span><br><span class="line">ORDER BY prod_price, prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324224918322.png"></p>
+<ul>
+<li>按降序排序。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_price, prod_name</span><br><span class="line">FROM products</span><br><span class="line">ORDER BY prod_price DESC;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324225112285.png"></p>
+<ul>
+<li>使用<code>ORDER BY</code>和<code>LIMIT</code>组合，<code>prod_price DESC</code>保证行由最贵到最便宜检索，<code>LIMIT 1</code>告诉MySQL仅返回一行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_price</span><br><span class="line">FROM products</span><br><span class="line">ORDER BY prod_price DESC</span><br><span class="line">LIMIT 1;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200324225653870.png"></p>
+<p><strong>NOTE：<code>ORDER BY</code>子句的位置</strong></p>
+<p>在给出<code>ORDER BY</code>子句时，应该保证它位于<code>FROM</code>子句之后。如果使用<code>LIMIT</code>，它必须位于<code>ORDER BY</code>之后。</p>
+<h2 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h2><ul>
+<li>在<code>SELECT</code>语句中，数据根据<code>WHERE</code>子句指定的搜索条件进行过滤。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_price &#x3D; 2.50;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325154457128.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><p><strong>SQL过滤与应用过滤。</strong>数据也可以在应用层过滤。为此目的， SQL的SELECT语句为客户机应用检索出超过实际所需的数据，然后客户机代码对返回数据进行循环，以提取出需要的行。通常，这种实现并不令人满意。因此，对数据库进行了优化，以便快速有效地对数据进行过滤。让客户机应用（或开发语言）处理数据库的工作将会极大地影响应用的性能，并且使所创建的应用完全不具备可伸缩性。此外，如果在客户机上过滤数据，服务器不得不通过网络发送多余的数据，这将导致网络带宽的浪费。  </p>
+</li>
+<li><p><code>WHERE</code>子句的位置。在同时使用<code>ORDER BY</code>和<code>WHERE</code>子句时，应该让<code>ORDER BY</code>位于<code>WHERE</code>之后  </p>
+</li>
+<li><p><code>WHERE</code>子句操作符</p>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325155122536.png"></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#检查单个值</span><br><span class="line">SELECT prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name &#x3D; &#39;fuses&#39;;</span><br><span class="line"></span><br><span class="line">#列出小于10元的产品</span><br><span class="line">SELECT prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_price &lt; 10;</span><br><span class="line"></span><br><span class="line">#不匹配检查</span><br><span class="line">SELECT vend_id, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id !&#x3D; 1003;</span><br><span class="line"></span><br><span class="line">#范围检查</span><br><span class="line">SELECT prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_price BETWEEN 5 AND 10;</span><br><span class="line"></span><br><span class="line">#空值检查</span><br><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_price IS NULL;</span><br></pre></td></tr></table></figure>
+
+<h2 id="AND-OR"><a href="#AND-OR" class="headerlink" title="AND OR"></a>AND OR</h2><ul>
+<li>AND`操作符，必须满足所有条件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_price, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id &#x3D; 103 AND prod_price &lt;&#x3D; 10;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>OR</code>操作符，匹配任一条件即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id &#x3D; 1002 OR vend_id &#x3D; 1003;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>AND</code>和<code>OR</code>组合使用。列出价格为10元（含）以上且由1002或1003制造的所有产品</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE (vend_id &#x3D; 1002 OR vend_id &#x3D; 1003) AND prod_price &gt;&#x3D; 10;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325202123235.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li>SQL的计算次序中<code>AND</code>的优先级比<code>OR</code>更高，因此在不加括号时会优先计算<code>AND</code>两侧条件</li>
+<li>任何时候使用具有AND和OR操作符的WHERE子句，都应该使用圆括号明确地分组操作符。不要过分依赖默认计算次序。</li>
+</ul>
+<h2 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h2><ul>
+<li><code>IN</code>操作符用来指定条件范围，范围中的每个条件都可以进行匹配  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_id, prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id IN (1002,1003)</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325205515719.png"></p>
+<p><strong>NOTE：<code>IN</code>操作符优点</strong></p>
+<ul>
+<li>在使用长的合法选项清单时， <code>IN</code>操作符的语法更清楚且更直观。</li>
+<li>在使用<code>IN</code>时，计算的次序更容易管理（因为使用的操作符更少）。</li>
+<li><code>IN</code>操作符一般比<code>OR</code>操作符清单执行更快。</li>
+<li><code>IN</code>的最大优点是可以包含其他<code>SELECT</code>语句，使得能够更动态地建立<code>WHERE</code>子句。</li>
+</ul>
+<h2 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h2><ul>
+<li>WHERE子句中的NOT操作符有且只有一个功能，那就是否定它之后所跟的任何条件。  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_id, prod_name, prod_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id NOT IN (1002,1003)</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200325205805757.png"></p>
+<p><strong>NOTE：MySQL中的<code>NOT</code></strong> </p>
+<p>MySQL 支 持 使 用 <code>NOT </code>对<code> IN</code> 、 <code>BETWEEN </code>和<code>EXISTS</code>子句取反，这与多数其他DBMS允许使用<code>NOT</code>对各种条件<br>取反有很大的差别。  </p>
+<h2 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h2><p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>通配符（wildcard）</strong>：用来匹配值的一部分的特殊字符  </li>
+<li><strong>搜索模式（search pattern）</strong>：由字面值、通配符或两者组合构成的搜索条件</li>
+<li><strong>谓词（predicate）</strong>：  操作符何时不是操作符？答案是在它作为谓词（ predicate）时。从技术上说， LIKE是谓词而不是操作符。虽然最终的结果是相同的，但应该对此术语有所了解  </li>
+</ul>
+<ul>
+<li>百分号（%）通配符。  例：找出所有以词jet起头的产品  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name LIKE &#39;jet%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195327166.png"></p>
+<ul>
+<li>匹配任意位置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name LIKE &#39;%anvil%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195506231.png"></p>
+<ul>
+<li>找出s起头以e结尾所有产品</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name LIKE &#39;s%e&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328195650035.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>注意尾空格</strong>：尾空格可能会干扰通配符匹配。例如，在保存词anvil 时 ， 如 果 它 后 面 有 一 个 或 多 个 空 格 ， 则 子 句 WHEREprod_name LIKE ‘%anvil’将不会匹配它们，因为在最后的l后有多余的字符。解决这个问题的一个简单的办法是在搜索模式最后附加一个%。一个更好的办法是使用函数  </li>
+<li><strong>注意NULL</strong>：虽然似乎%通配符可以匹配任何东西，但有一个例外，即NULL。即使是WHERE prod_name LIKE ‘%’也不能匹配用值NULL作为产品名的行  </li>
+</ul>
+<ul>
+<li>下划线（_）通配符。用途与%一样，但下划线只匹配单个字符而不是多个字符。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name LIKE &#39;_ ton anvil&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328200233496.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name LIKE &#39;% ton anvil&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328200302936.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>不要过度使用通配符</strong>。如果其他操作符能达到相同的目的，应该使用其他操作符。</li>
+<li>在确实需要使用通配符时，除非绝对有必要，否则<strong>不要把它们用在搜索模式的开始处</strong>。把通配符置于搜索模式的开始处，搜索起来是最慢的。</li>
+<li><strong>仔细注意通配符的位置</strong>。如果放错地方，可能不会返回想要的数据</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><ul>
+<li>基本字符匹配。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;.000&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328201704047.png"></p>
+<p><strong>NOTE：匹配不区分大小写。</strong></p>
+<p>MySQL中的正则表达式匹配（自版本3.23.4后）不区分大小写（即，大写和小写都匹配）。为区分大小写，可使用BINARY关键字，如<code>WHERE prod_name REGEXPBINARY &#39;JetPack .000&#39; </code> </p>
+<ul>
+<li>进行<code>OR</code>匹配。也可以给出两个以上的<code>OR</code>条件，如<code>1000|2000|3000</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;1000|2000&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328201933837.png"></p>
+<ul>
+<li>匹配几个字符之一。使用正则表达式<code>[123]</code>定义一组数字，匹配1或2或3</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;[123] Ton&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328204647343.png"></p>
+<ul>
+<li>范围匹配</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;[1-5] Ton&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205045949.png"></p>
+<ul>
+<li>匹配特殊字符。如果使用<code>.</code>，则会匹配任意字符</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;\\.&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205431822.png"></p>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328205731631.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>匹配<code>\</code>。</strong>为了匹配<code>\</code>本身，需要使用<code>\\\</code></li>
+<li>**<code>\</code>或<code>\\?</code>**。多数正则表达式实现使用单个反斜杠转义特殊字符，以便能使用这些字符本身。但MySQL要求两个反斜杠（ MySQL自己解释一个，正则表达式库解释另一个）。</li>
+</ul>
+<ul>
+<li>匹配字符类</li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210030128.png"></p>
+<ul>
+<li>匹配多个实例</li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210048635.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;\\([0-9] sticks?\\)&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210132863.png"></p>
+<p><strong>分析</strong>：正则表达式<code>\\([0-9] sticks?\\)</code>需要解说一下。 <code>\\(</code>匹配<code>(</code>，<code>[0-9]</code>匹配任意数字（这个例子中为1和5），<code>sticks?</code>匹配<code>stick</code>和<code>sticks</code>（ <code>s</code>后的<code>?</code>使<code>s</code>可选，因为<code>?</code>匹配它前面的任何字符的0次或1次出现），<code>\\)</code>匹配<code>)</code>。没有<code>?</code>，匹配<code>stick</code>和<code>sticks</code>会非常困难  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;[[:digit:]]&#123;4&#125;&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210502461.png"></p>
+<p><strong>分析</strong>：<code>[:digit:]</code>匹配任意数字，因而它为数字的一个集合。<code> {4}</code>确切地要求它前面的字符（任意数字）出现4次，所以<code>[[:digit:]]{4}</code>匹配连在一起的任意4位数字  </p>
+<ul>
+<li>定位符</li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210549211.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_name REGEXP &#39;^[0-9\\.]&#39;;</span><br><span class="line">ORDER BY prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200328210730463.png"></p>
+<p><strong>分析</strong>：之前的例子都是匹配一个串中任意位置的文本。<code>^[0-9\\.]</code>只在<code>.</code>或任意数字为串中第一个字符时才匹配它们  </p>
+<p><strong>NOTE：使REGEXP起类似LIKE的作用</strong>。<code>LIKE</code>和<code>REGEXP</code>的不同在于， <code>LIKE</code>匹配整个串而<code>REGEXP</code>匹配子串。利用定位符，通过用<code>^</code>开始每个表达式，用<code>$</code>结束每个表达式，可以使<code>REGEXP</code>的作用与<code>LIKE</code>一样。  </p>
+<h2 id="计算字段"><a href="#计算字段" class="headerlink" title="计算字段"></a>计算字段</h2><ul>
+<li><p>例：vendors表包含供应商名和位置信息。假如要生成一个供应商报表，需要在供应商的名字中按照name(location)这样的格式列出供应商的位置。此报表需要单个值，而表中数据存储在两个列vend_name和vend_country中。此外，需要用括号将vend_country括起来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT Concat(vend_name, &#39;(&#39;, vend_country, &#39;)&#39;)</span><br><span class="line">FROM vendors</span><br><span class="line">ORDER BY vend_name;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329195706190.png"></p>
+<ul>
+<li>使用<code>RTrim()</code>函数删除数据右侧多余的空格来整理数据。也可以使用<code>LTrim()</code>删除左边的空格，<code>Trim()</code>删除左右两边的空格</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT Concat(RTrim(vend_name), &#39;(&#39;, RTrim(vend_country), &#39;)&#39;)</span><br><span class="line">FROM vendors</span><br><span class="line">ORDER BY vend_name;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用别名。使用<code>AS</code>关键字将<code>vend_title</code>作为新计算列的名字</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT Concat(RTrim(vend_name), &#39;(&#39;, RTrim(vend_country), &#39;)&#39;) AS</span><br><span class="line">vend_title</span><br><span class="line">FROM vendors</span><br><span class="line">ORDER BY vend_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329200627534.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>别名的其他用途</strong>。别名还有其他用途。常见的用途包括在实际的表列名包含不符合规定的字符（如空格）时重新命名它，在原来的名字含混或容易误解时扩充它。</li>
+<li><strong>导出列</strong>。别名有时也称为导出列（ derived column），不管称为什么，它们所代表的都是相同的东西。  </li>
+</ul>
+<ul>
+<li>执行算术运算</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_id, </span><br><span class="line">			 quantity, </span><br><span class="line">			 item_price, </span><br><span class="line">			 order_num,</span><br><span class="line">			 quantity * item_price AS expanded_price</span><br><span class="line">FROM orderitems</span><br><span class="line">WHERE order_num &#x3D; 20005;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329201917242.png"></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><strong>NOTE：函数没有SQL的可移植性强。</strong></p>
+<p>能运行在多个系统上的代码称为可移植的（ portable）。相对来说，多数SQL语句是可移植的，在SQL实现之间有差异时，这些差异通常不那么难处理。而函数的可移植性却不强。几乎每种主要的DBMS的实现都支持其他实现不支持的函数，而且有时差异还很大。</p>
+<p>为了代码的可移植，许多SQL程序员不赞成使用特殊实现的功能。虽然这样做很有好处，但不总是利于应用程序的性能。如果不使用这些函数，编写某些应用程序代码会很艰难。必须利用其他方法来实现DBMS非常有效地完成的工作。</p>
+<p>如果你决定使用函数，应该保证做好代码注释，以便以后你（或其他人）能确切地知道所编写SQL代码的含义  </p>
+<ul>
+<li>本文处理函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_name, Upper(vend_name) AS vend_name_upcase</span><br><span class="line">FROM vendors</span><br><span class="line">ORDER BY vend_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204223193.png"></p>
+<ul>
+<li><strong>常用文本处理函数</strong></li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204814361.png"></p>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329204824576.png"></p>
+<ul>
+<li><code>Soundex()</code>通过发音字符和音节检索</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_name, cust_contact</span><br><span class="line">FROM customers</span><br><span class="line">WHERE Soundex(cust_contact) &#x3D; Soundex(&#39;Y Lie&#39;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329205451281.png"></p>
+<ul>
+<li><strong>常用日期和时间处理函数</strong></li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329210101456.png"></p>
+<ul>
+<li>检索2005年9月1日订单记录</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_date, cust_id, order_num</span><br><span class="line">FROM orders</span><br><span class="line">WHERE Date(order_date) &#x3D; &#39;2005-09-01&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329210223892.png"></p>
+<ul>
+<li>检索2005年9月所有订单</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_id, order_num</span><br><span class="line">FROM orders</span><br><span class="line">WHERE Year(order_date) &#x3D; 2005 AND Month(order_date) &#x3D; 9;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329213009284.png"></p>
+<ul>
+<li>数值处理函数</li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200329213445348.png"></p>
+<h2 id="汇总数据"><a href="#汇总数据" class="headerlink" title="汇总数据"></a>汇总数据</h2><p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330201509011.png"></p>
+<ul>
+<li><code>AVG()</code>函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(prod_price) AS avg_price</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330201704552.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(prod_price) AS avg_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id &#x3D; 1003;#返回特定供应商产品平均价格</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330203032468.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li>**只用于单个列 <code>AVG()</code>**。只能用来确定特定数值列的平均值，而且列名必须作为函数参数给出。为了获得多个列的平均值，必须使用多个AVG()函数。  </li>
+<li><strong>NULL值</strong>。<code>AVG()</code>函数忽略列值为NULL的行</li>
+</ul>
+<ul>
+<li><code>COUNT()</code>函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#返回customers表中客户的总数</span><br><span class="line">SELECT COUNT(*) AS num_cust</span><br><span class="line">FROM customers;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330204247198.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#只对具有电子邮件地址的客户计数</span><br><span class="line">SELECT COUNT(cust_email) AS num_cust</span><br><span class="line">FROM customers;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330204644511.png"></p>
+<ul>
+<li><code>MAX()</code>函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#返回products表中最贵物品的价格</span><br><span class="line">SELECT MAX(prod_price) AS max_price</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330205041320.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>对非数值数据使用<code>MAX()</code>。</strong>虽然MAX()一般用来找出最大的数值或日期值，但MySQL允许将它用来返回任意列中的最大值，包括返回文本列中的最大值。在用于文本数据时，如果数据按相应的列排序，则MAX()返回最后一行  </li>
+<li>NULL值。<code>MAX()</code>函数忽略列值为NULL的行。  </li>
+</ul>
+<ul>
+<li><code>MIN()</code>函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT MIN(prod_price) AS min_price</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>SUM()</code>函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#检索订购物品的总数</span><br><span class="line">SELECT SUM(quantity) AS items_ordered</span><br><span class="line">FROM orderitems</span><br><span class="line">WHERE order_num &#x3D; 20005;</span><br><span class="line">#合计计算值</span><br><span class="line">SELECT SUM(item_price * quantity) AS total_price</span><br><span class="line">FROM orderitems</span><br><span class="line">WHERE order_num &#x3D; 20005;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>聚集不同值，DISTINCT</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#平均值只考虑各个不同的价格</span><br><span class="line">SELECT AVG(DISTINCT prod_price) AS avg_price</span><br><span class="line">FROM products</span><br><span class="line">WHERE vend_id &#x3D; 1003;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>组合聚集函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT COUNT(*) AS num_items,</span><br><span class="line">		MIN(prod_price) AS price_min,</span><br><span class="line">		MAX(prod_price) AS price_max,</span><br><span class="line">		AVG(prod_price) AS price_avg</span><br><span class="line">FROM products;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200330211434750.png"></p>
+<p>分析：这里用单条SELECT语句执行了4个聚集计算，返回4个值（products表中物品的数目，产品价格的最高、最低以及平均值）  </p>
+<h2 id="分组数据"><a href="#分组数据" class="headerlink" title="分组数据"></a>分组数据</h2><ul>
+<li><code>GROUP BY</code>创建分组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#对每个vend_id计算num_prods一次</span><br><span class="line">SELECT vend_id, COUNT(*) AS num_prods</span><br><span class="line">FROM products</span><br><span class="line">GROUP BY vend_id;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331211416300.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li>GROUP BY子句可以包含任意数目的列。这使得能对分组进行嵌套，为数据分组提供更细致的控制。</li>
+<li>如果在GROUP BY子句中嵌套了分组，数据将在最后规定的分组上进行汇总。换句话说，在建立分组时，指定的所有列都一起计算（所以不能从个别的列取回数据）。</li>
+<li>GROUP BY子句中列出的每个列都必须是检索列或有效的表达式（但不能是聚集函数）。如果在SELECT中使用表达式，则必须在GROUP BY子句中指定相同的表达式。不能使用别名。</li>
+<li>除聚集计算语句外， SELECT语句中的每个列都必须在GROUP BY子句中给出。</li>
+<li>如果分组列中具有NULL值，则NULL将作为一个分组返回。如果列中有多行NULL值，它们将分为一组。</li>
+<li>GROUP BY子句必须出现在WHERE子句之后， ORDER BY子句之前。  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#使用ROLLUP对每个组及每个分组汇总</span><br><span class="line">SELECT vend_id, COUNT(*) AS num_prods</span><br><span class="line">FROM products</span><br><span class="line">GROUP BY vend_id WITH ROLLUP;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331211722811.png"></p>
+<ul>
+<li><code>HAVING</code>过滤分组</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_id, COUNT(*) AS num_prods</span><br><span class="line">FROM products</span><br><span class="line">GROUP BY vend_id</span><br><span class="line">HAVING COUNT(*) &gt;&#x3D; 2;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331212939908.png"></p>
+<ul>
+<li><code>WHERE</code>与<code>HAVING</code>同时使用的情况</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#通过WHERE进一步过滤上面的例子</span><br><span class="line">SELECT vend_id, COUNT(*) AS num_prods</span><br><span class="line">FROM products</span><br><span class="line">WHERE prod_price &gt;&#x3D; 10</span><br><span class="line">GROUP BY vend_id</span><br><span class="line">HAVING COUNT(*) &gt;&#x3D; 2;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331212655520.png"></p>
+<ul>
+<li><code>ORDER BY</code>与<code>GROUP BY</code></li>
+</ul>
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213333442.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_num, SUM(quantity*item_price) AS ordertotal</span><br><span class="line">FROM orderitems</span><br><span class="line">GROUP BY order_num</span><br><span class="line">HAVING SUM(quantity*item_price) &gt;&#x3D; 50;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213832392.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#将总计订单价格排序输出</span><br><span class="line">SELECT order_num, SUM(quantity*item_price) AS ordertotal</span><br><span class="line">FROM orderitems</span><br><span class="line">GROUP BY order_num</span><br><span class="line">HAVING SUM(quantity*item_price) &gt;&#x3D; 50</span><br><span class="line">ORDER BY ordertotal;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331213903694.png"></p>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#检索订购物品TNT2的所有客户</span><br><span class="line">#通过客户ID查询客户信息</span><br><span class="line">SELECT cust_name, cust_contact</span><br><span class="line">FROM customers</span><br><span class="line">#外部查询，通过返回的订单号查询客户ID</span><br><span class="line">WHERE cust_id IN(SELECT cust_id</span><br><span class="line">				 FROM orders</span><br><span class="line">                 #内部查询，检索包含TNT2的所有订单编号</span><br><span class="line">				 WHERE order_num IN (SELECT order_num</span><br><span class="line">                  					 FROM orderitems</span><br><span class="line">                 				  	 WHERE prod_id &#x3D; &#39;TNT2&#39;));</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200331220024640.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>列必须匹配。</strong>在<code>WHERE</code>子句中使用子查询（如这里所示），应该保证<code>SELECT</code>语句具有与<code>WHERE</code>子句中相同数目的列。通常，子查询将返回单个列并且与单个列匹配，但如果需要也可以使用多个列。  </li>
+<li><strong>子查询和性能。</strong>这里给出的代码有效并获得所需的结果。但是，使用子查询并不总是执行这种类型的数据检索的最有效的方法。</li>
+</ul>
+<h2 id="联结表"><a href="#联结表" class="headerlink" title="联结表"></a>联结表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#创建联结</span><br><span class="line">SELECT vend_name, prod_name, prod_price</span><br><span class="line">FROM vendors, products</span><br><span class="line">WHERE vendors.vend_id &#x3D; products.vend_id</span><br><span class="line">ORDER BY vend_name, prod_name;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401204933065.png"></p>
+<p><strong>NOTE：</strong></p>
+<ul>
+<li><strong>完全限定列名。</strong>在引用的列可能出现二义性时，必须使用完全限定列名（用一个点分隔的表名和列名）。如果引用一个没有用表名限制的具有二义性的列名， MySQL将返回错误。</li>
+<li><strong>不要忘了WHERE子句。</strong>应该保证所有联结都有WHERE子句，否则MySQL将返回比想要的数据多得多的数据。同理，应该保证WHERE子句的正确性。不正确的过滤条件将导致MySQL返回不正确的数据。  </li>
+<li><strong>叉联结。</strong>有时我们会听到返回称为叉联结（ cross join）的笛卡儿积的联结类型。  </li>
+</ul>
+<ul>
+<li>内部联结</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price</span><br><span class="line">FROM vendors INNER JOIN products</span><br><span class="line">ON vendors.vend_id &#x3D; products.vend_id;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401210547903.png"></p>
+<p>分析：这里，两个表之间的关系是<code>FROM</code>子句的组成部分，以<code>INNER JOIN</code>指定。在使用这种语法时，联结条件用特定的<code>ON</code>子句而不是<code>WHERE</code>子句给出。传递给<code>ON</code>的实际条件与传递给<code>WHERE</code>的相同  </p>
+<ul>
+<li>联结多个表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT prod_name, vend_name, prod_price, quantity</span><br><span class="line">FROM orderitems, products, vendors</span><br><span class="line">WHERE products.vend_id &#x3D; vendors.vend_id</span><br><span class="line">	AND orderitems.prod_id &#x3D; products.prod_id</span><br><span class="line">	AND order_num &#x3D; 20005;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401211128130.png"></p>
+<p><strong>分析：</strong>显示编号为20005的订单中的物品。订单物品存储在orderitems表中。每个产品按其产品ID存储，它引用products表中的产品。这些产品通过供应商ID联结到vendors表中相应的供应商，供应商ID存储在每个产品的记录中。这里的FROM子句列出了3个表，而WHERE子句定义了这两个联结条件，而第三个联结条件用来过滤出订单20005中的物品  </p>
+<p><strong>NOTE：性能考虑</strong></p>
+<p>MySQL在运行时关联指定的每个表以处理联结。这种处理可能是非常耗费资源的，因此应该仔细，不要联结<br>不必要的表。联结的表越多，性能下降越厉害  </p>
+<ul>
+<li>对比子查询</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#返回订购产品TNT2的客户列表</span><br><span class="line">#子查询</span><br><span class="line">SELECT cust_name, cust_contact</span><br><span class="line">FROM customers</span><br><span class="line">#外部查询，通过返回的订单号查询客户ID</span><br><span class="line">WHERE cust_id IN(SELECT cust_id</span><br><span class="line">				 FROM orders</span><br><span class="line">                 #内部查询，检索包含TNT2的所有订单编号</span><br><span class="line">				 WHERE order_num IN (SELECT order_num</span><br><span class="line">                  					  FROM orderitems</span><br><span class="line">                 				  	 WHERE prod_id &#x3D; &#39;TNT2&#39;));</span><br><span class="line">#联结查询</span><br><span class="line">SELECT cust_name, cust_contact</span><br><span class="line">FROM customers, orders, orderitems</span><br><span class="line">WHERE customers.cust_id &#x3D; orders.cust_id</span><br><span class="line">	AND orderitems.order_num &#x3D; orders.order_num</span><br><span class="line">	AND prod_id &#x3D; &#39;TNT2&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/10/MySQL%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/image-20200401211827954.png"></p>
+</div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/MySQL/">MySQL</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜歡這篇文章嗎? 贊助一下作者吧!</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付寶</span><span class="qrcode"><img src="/" alt="支付寶"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>WeChat</span><span class="qrcode"><img src="/" alt="WeChat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/06/29/MacOS%E4%B8%8B%E7%BC%96%E8%AF%91RedisDesktopManagement%E6%8A%A5no-file-at-Python-framework-%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">MacOS下编译RedisDesktopManagement报no file at.../Python.framework/...错解决方案</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/06/10/%E5%AE%89%E8%A3%85Homebrew%E9%81%87%E5%88%B0connection-refused%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8F%8AProxifier%E9%85%8D%E7%BD%AE/"><span class="level-item">安装Homebrew遇到connection refused问题解决及Proxifier配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">評論</h3><div class="notification is-danger">You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.</div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">文章目錄</h3><ul class="menu-list"><li><a class="is-flex" href="#USE"><span class="mr-2">1</span><span>USE</span></a></li><li><a class="is-flex" href="#SHOW"><span class="mr-2">2</span><span>SHOW</span></a></li><li><a class="is-flex" href="#SELECT"><span class="mr-2">3</span><span>SELECT</span></a></li><li><a class="is-flex" href="#LIMIT"><span class="mr-2">4</span><span>LIMIT</span></a></li><li><a class="is-flex" href="#ORDER-BY"><span class="mr-2">5</span><span>ORDER BY</span></a></li><li><a class="is-flex" href="#WHERE"><span class="mr-2">6</span><span>WHERE</span></a></li><li><a class="is-flex" href="#AND-OR"><span class="mr-2">7</span><span>AND OR</span></a></li><li><a class="is-flex" href="#IN"><span class="mr-2">8</span><span>IN</span></a></li><li><a class="is-flex" href="#NOT"><span class="mr-2">9</span><span>NOT</span></a></li><li><a class="is-flex" href="#LIKE"><span class="mr-2">10</span><span>LIKE</span></a></li><li><a class="is-flex" href="#正则表达式"><span class="mr-2">11</span><span>正则表达式</span></a></li><li><a class="is-flex" href="#计算字段"><span class="mr-2">12</span><span>计算字段</span></a></li><li><a class="is-flex" href="#函数"><span class="mr-2">13</span><span>函数</span></a></li><li><a class="is-flex" href="#汇总数据"><span class="mr-2">14</span><span>汇总数据</span></a></li><li><a class="is-flex" href="#分组数据"><span class="mr-2">15</span><span>分组数据</span></a></li><li><a class="is-flex" href="#子查询"><span class="mr-2">16</span><span>子查询</span></a></li><li><a class="is-flex" href="#联结表"><span class="mr-2">17</span><span>联结表</span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分類</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/%E5%91%BD%E4%BB%A4/"><span class="level-start"><span class="level-item">命令</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="level-start"><span class="level-item">工具使用问题与解决方案</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">工具安装及配置</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-07-23T12:33:28.000Z">2020-07-23</time></p><p class="title is-6"><a class="link-muted" href="/2020/07/23/Eight-rounding-modes%E5%85%AB%E7%A7%8D%E8%88%8D%E5%85%A5%E6%A8%A1%E5%BC%8F%E8%A7%A3%E6%9E%90/">Eight rounding modes八种舍入模式解析</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-07-22T15:29:15.000Z">2020-07-22</time></p><p class="title is-6"><a class="link-muted" href="/2020/07/22/Mac%E4%BD%BF%E7%94%A8Marginnote3%E6%97%B6%EF%BC%8C%E5%90%AF%E5%8A%A8%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%89%93%E5%BC%80%E5%9B%BA%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E7%AC%94%E8%AE%B0%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Mac使用Marginnote3时，启动会自动打开固定某一个笔记解决方案</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">工具使用问题与解决方案</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-07-21T14:16:09.000Z">2020-07-21</time></p><p class="title is-6"><a class="link-muted" href="/2020/07/21/MacOS%E4%B8%8B%E5%AE%89%E8%A3%85JDK%E5%B9%B6%E9%85%8D%E7%BD%AE%E8%B7%AF%E5%BE%84%E4%BB%A5%E8%A7%A3%E5%86%B3Homebrew%E5%AE%89%E8%A3%85Maven%E5%90%8E%E7%9A%84Java%E8%B7%AF%E5%BE%84%E4%B8%8D%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/">MacOS下安装JDK并配置路径以解决Homebrew安装Maven后的Java路径不匹配问题</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">工具安装及配置</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-07-19T08:23:15.000Z">2020-07-19</time></p><p class="title is-6"><a class="link-muted" href="/2020/07/19/Homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Homebrew常用命令</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E5%91%BD%E4%BB%A4/">命令</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-07-18T08:07:09.000Z">2020-07-18</time></p><p class="title is-6"><a class="link-muted" href="/2020/07/18/Homebrew%E5%AE%89%E8%A3%85Docker-Desktop-for-Mac%E5%8F%8AMacOS10-15%E7%89%88%E6%9C%AC%E7%9A%84%E9%95%9C%E5%83%8F%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95/">Homebrew安装Docker Desktop for Mac及MacOS10.15版本的镜像配置方法</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">工具安装及配置</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">彙整</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">標籤</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Homebrew/"><span class="tag">Homebrew</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Java/"><span class="tag">Java</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MacOS/"><span class="tag">MacOS</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Mike&#039;s Blog" height="28"></a><p class="size-small"><span>&copy; 2020 VONSYLVIA</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-TW");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到頁首" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="請輸入關鍵字..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"請輸入關鍵字...","untitled":"(Untitled)","posts":"文章","pages":"Pages","categories":"分類","tags":"標籤"});
+        });</script></body></html>
