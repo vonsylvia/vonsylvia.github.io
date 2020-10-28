@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.1"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>CMSC 5728 Decision Analysis &amp; Game Theory - Lecture 08 - Mike&#039;s Blog</title><meta description="MAB: Stochastic (IID)"><meta property="og:type" content="blog"><meta property="og:title" content="CMSC 5728 Decision Analysis &amp; Game Theory - Lecture 08"><meta property="og:url" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/"><meta property="og:site_name" content="Mike&#039;s Blog"><meta property="og:description" content="MAB: Stochastic (IID)"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080252844.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080449438.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028081219247.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028082912191.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028083042760.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028084951166.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028085034120.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028085420661.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028090343255.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028090411837.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028091837583.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095413161.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095456389.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095531543.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095705538.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100456088.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100544508.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100712896.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100832422.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100925339.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028101943098.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102108402.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102225131.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102253683.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102336469.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102407214.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102449350.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102459326.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103354015.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103427830.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103453248.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103506068.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103550546.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103741628.png"><meta property="og:image" content="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103753227.png"><meta property="article:published_time" content="2020-10-27T23:55:18.000Z"><meta property="article:modified_time" content="2020-10-28T02:38:07.192Z"><meta property="article:author" content="VONSYLVIA"><meta property="article:tag" content="决策论与博弈论"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080252844.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/"},"headline":"Mike's Blog","image":["http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080252844.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080449438.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028081219247.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028082912191.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028083042760.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028084951166.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028085034120.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028085420661.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028090343255.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028090411837.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028091837583.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095413161.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095456389.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095531543.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095705538.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100456088.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100544508.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100712896.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100832422.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100925339.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028101943098.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102108402.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102225131.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102253683.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102336469.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102407214.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102449350.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102459326.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103354015.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103427830.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103453248.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103506068.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103550546.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103741628.png","http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103753227.png"],"datePublished":"2020-10-27T23:55:18.000Z","dateModified":"2020-10-28T02:38:07.192Z","author":{"@type":"Person","name":"VONSYLVIA"},"description":"MAB: Stochastic (IID)"}</script><link rel="canonical" href="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Mike&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/vonsylvia"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><time class="level-item" dateTime="2020-10-27T23:55:18.000Z" title="2020-10-27T23:55:18.000Z">2020-10-28</time><span class="level-item"><a class="link-muted" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a></span><span class="level-item">8 分钟 读完 (大约 1208 个字)</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">CMSC 5728 Decision Analysis &amp; Game Theory - Lecture 08</h1><div class="content"><ul>
+<li>MAB: Stochastic (IID)</li>
+</ul>
+<a id="more"></a>
+
+<h1 id="MAB-Stochastic-IID"><a href="#MAB-Stochastic-IID" class="headerlink" title="MAB: Stochastic (IID)"></a>MAB: Stochastic (IID)</h1><ul>
+<li><p>对每个 arm i ∈ {1, …, N}，reward 从<strong>固定</strong>但<strong>未知</strong>的分布 vi （如正态分布或均匀分布）中<strong>独立</strong>且<strong>相同</strong>地生成，平均值为 μi</p>
+<p><img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080252844.png"></p>
+</li>
+<li><p>我们定义历史为 Ht-1 来包括时间 t 之前做出的所有决定和观察</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028080449438.png" style="zoom:50%;">
+</li>
+<li><p>给定历史 Ht-1，在时间 t 选择 arm It = i</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028081219247.png" style="zoom:50%;">
+
+<p>此时，你获得的 reward rt 是跟随 random variable vi 的，这个 random variable 的平均值是 μi。</p>
+<p>我们在上节课讲过，如果我们知道所有的 μ，我们只要每次选择最大的 μ，就是最优选择，但现在我们不知道，那么要怎么去选择呢？</p>
+</li>
+</ul>
+<h2 id="How-to-evaluate"><a href="#How-to-evaluate" class="headerlink" title="How to evaluate"></a>How to evaluate</h2><ul>
+<li><p>Regret：算法的总 reward 与 “benchmark” 算法之间的差距</p>
+</li>
+<li><p>benchmark algorithm：借助分布知识来构建最佳策略（即使它们可能无法实现，不在我们的 μ 中）</p>
+<ul>
+<li><p>总是采取我们所知道的 μi 中最高那个</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028082912191.png" style="zoom:50%;">
+
+<p>在时间 T （总时间）积累的平均 reward，即在 T 中一直选择最优的 μi 的和</p>
+</li>
+</ul>
+</li>
+<li><p>在 T 中的 regret</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028083042760.png" style="zoom:50%;">
+</li>
+<li><p>即使是确定性的选臂策略，其数量也是随机的（？）</p>
+</li>
+<li><p>目标：限定预期的 regret 或高概率的界限</p>
+</li>
+</ul>
+<h1 id="Adversarial-MAB"><a href="#Adversarial-MAB" class="headerlink" title="Adversarial MAB"></a>Adversarial MAB</h1><ul>
+<li><p>我们部队 reward 产生过程做任何假设：除了数量上的界限（？）</p>
+</li>
+<li><p>任意未知序列：<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028084951166.png" style="zoom:50%;"></p>
+</li>
+<li><p>在时间 t 选择 arm It，我们算法的 reward 是 <img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028085034120.png" style="zoom: 50%;"></p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028085420661.png" style="zoom:50%;">
+</li>
+<li><p>什么是 adversary</p>
+<ul>
+<li>仅仅意味着奖励生成过程是对抗性的，并为你的算法提供了最坏的奖励序列</li>
+</ul>
+</li>
+<li><p>一般情况下，这是个绝望的问题</p>
+<ul>
+<li>未来与过去无关</li>
+<li>不管你在时间 t 做出了什么决定，adversary 会做出最坏的决定</li>
+</ul>
+</li>
+<li><p>更为谦虚的目标</p>
+<ul>
+<li><p>事后我们能否与 SINGLE BEST ARM 竞争？</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028090343255.png" style="zoom:50%;">
+</li>
+</ul>
+</li>
+<li><p>在时间 T 的 regret</p>
+</li>
+</ul>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028090411837.png" style="zoom:50%;">
+
+<h1 id="Stochastic-but-not-IID"><a href="#Stochastic-but-not-IID" class="headerlink" title="Stochastic but not IID"></a>Stochastic but not IID</h1><p><strong>Markovian inputs:</strong></p>
+<ul>
+<li>不同 arm 的奖励是独立的</li>
+<li>arm 的 reward 分布仅取决于过去的可观察 arm 状态，并且 arm 的状态可以更改，例如 Markov chain</li>
+<li>状态转换的不确定性和给予的 reward 状态</li>
+<li>每次拉 arm 时，都会观察到其 reward 和状态转换</li>
+</ul>
+<h1 id="MAB-Problem-definition"><a href="#MAB-Problem-definition" class="headerlink" title="MAB Problem definition"></a>MAB Problem definition</h1><ul>
+<li>N arms</li>
+<li>在每个时间点 t = 1, 2, 3, …，拉一个 N 中的 arm</li>
+<li>令 It ∈ {1, 2, …, N} 作为在第 t 个时间点拉的 arm</li>
+<li>在拉 arm 之后，我们可以观察（或收到）一个 reward rt ∈ [0, 1]（Bernouli R.V.）</li>
+<li>对于一个固定的 T，我们的目标是最大化 <img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028091837583.png" style="zoom:50%;"></li>
+</ul>
+<h1 id="Stochastic-Reward-model"><a href="#Stochastic-Reward-model" class="headerlink" title="Stochastic Reward model"></a>Stochastic Reward model</h1><ul>
+<li><p>随即假设与 IID 模型</p>
+</li>
+<li><p>来自 arm i 的 reward 遵循均值 μi 的概率分布 vi</p>
+</li>
+<li><p>在我们之前的 formulation 中，vi 遵循 Bernoulli distribution</p>
+</li>
+<li><p>当拉一个 arm 时，reward 会从分布 vi 中产生（正态分布或均匀分布或exp分布）</p>
+</li>
+<li><p>令 <img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095413161.png" style="zoom:50%;"> 表示直到时间点 t - 1 的历史，我们可以写作</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095456389.png" style="zoom:50%;">
+</li>
+<li><p>那么我们在 reward 的假设可以写作</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095531543.png" style="zoom:50%;">
+</li>
+<li><p>这也暗示：<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028095705538.png" style="zoom:50%;"></p>
+</li>
+<li><p>或者，给定截止时间 t - 1 并选择 arm It 的历史记录，将独立于所选 arm 的分布来获取奖励</p>
+</li>
+</ul>
+<h1 id="Performance-Evaluation-Regret"><a href="#Performance-Evaluation-Regret" class="headerlink" title="Performance Evaluation: Regret"></a>Performance Evaluation: Regret</h1><ul>
+<li><p>任何 arm 选择算法都会与 oracle 进行比较</p>
+</li>
+<li><p>oracle 了解概率分布 vi i ∈ {1, …, N} 并且在所有时间点选择最好的 arm。或者 <img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100456088.png" style="zoom:50%;"> 和<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100544508.png" style="zoom:50%;"> 分别是最佳 arm 的索引和最佳 arm 的平均 reward</p>
+</li>
+<li><p>在时间 T 的 regret 是</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100712896.png" style="zoom:50%;">
+</li>
+<li><p>我们的目标是最小化 R(T)。注意 R(T) 是一个随机变量，因为 It 是随机的。（E[R(T)] 是 average total mistakes）</p>
+</li>
+<li><p>定义期望的 regret</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100832422.png" style="zoom:50%;">
+</li>
+<li><p>通常，我们想要 regret E[R(T)] 是 sub-linear。<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028100925339.png" style="zoom:50%;"></p>
+</li>
+</ul>
+<h1 id="Concentration-Bounds"><a href="#Concentration-Bounds" class="headerlink" title="Concentration Bounds"></a>Concentration Bounds</h1><ul>
+<li><p>不失一般性，考虑我们要估计 arm 1 的获胜概率</p>
+</li>
+<li><p>我们知道它的 reward 是 Bernoulli 随机变量 X，有 0 或 1，并且概率分别是 (1 - μ) 和 μ</p>
+</li>
+<li><p>所以平均 reward 是 0 × (1 - μ) + 1 × μ = μ</p>
+</li>
+<li><p>令 X1, X2, …, Xn 为一系列独立且分布均匀的随机变量（它们是 X 的 IID）。换句话说，Xi 是 arm 1 输出的第 i 个样本（或观察）</p>
+</li>
+<li><p>此外，令均值 μ = E[Xi] ＜ 无限，并且对于所有 i ∈ {1,2, …, n}，方差是 <img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028101943098.png" style="zoom: 33%;"> = E[Xi] &lt; 无限</p>
+</li>
+<li><p>为了估计 μ，使用 empirical mean</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102108402.png" style="zoom:50%;">
+</li>
+<li><p>这是一个随机变量，因为 Xi 有随机变量的值</p>
+</li>
+<li><p>同时还是 μ 的 unbiased estimator</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102225131.png" style="zoom:50%;">
+</li>
+<li><p>因为 Xi 是 IID，变量</p>
+<p><img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102253683.png"></p>
+</li>
+</ul>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102336469.png" style="zoom: 33%;">
+
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102407214.png" style="zoom: 33%;">
+
+<ul>
+<li><img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102449350.png"></li>
+</ul>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028102459326.png" style="zoom:50%;">
+
+<h1 id="Markov’s-Inequality"><a href="#Markov’s-Inequality" class="headerlink" title="Markov’s Inequality"></a>Markov’s Inequality</h1><h2 id="Lemma"><a href="#Lemma" class="headerlink" title="Lemma"></a>Lemma</h2><p>对于任意随机变量 X 并且 ε &gt; 0，我们有</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103354015.png" style="zoom:50%;">
+
+<h2 id="Proof"><a href="#Proof" class="headerlink" title="Proof"></a>Proof</h2><p>令 Y = |X|，所以<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103427830.png" style="zoom:50%;"> 注意 Y 是一个非负随机变量</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103453248.png" style="zoom:50%;">
+
+<p>所以我们有</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103506068.png" style="zoom:50%;">
+
+<p>考虑一个非负离散随机变量 X，E[X] = <img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103550546.png" style="zoom: 33%;"></p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103741628.png" style="zoom:50%;">
+
+<p>所以会变成</p>
+<img src="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/image-20201028103753227.png" style="zoom:50%;">
+
+</div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA%E4%B8%8E%E5%8D%9A%E5%BC%88%E8%AE%BA/">决策论与博弈论</a></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/10/23/CMSC-5724-Data-Mining-and-Knowledge-Discovery-Lecture-06/"><span class="level-item">CMSC 5724 Data Mining and Knowledge Discovery - Lecture 06</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="fb-comments" data-width="100%" data-href="http://yoursite.com/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/" data-num-posts="5"></div><script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v2.8";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#MAB-Stochastic-IID"><span class="mr-2">1</span><span>MAB: Stochastic (IID)</span></a><ul class="menu-list"><li><a class="is-flex" href="#How-to-evaluate"><span class="mr-2">1.1</span><span>How to evaluate</span></a></li></ul></li><li><a class="is-flex" href="#Adversarial-MAB"><span class="mr-2">2</span><span>Adversarial MAB</span></a></li><li><a class="is-flex" href="#Stochastic-but-not-IID"><span class="mr-2">3</span><span>Stochastic but not IID</span></a></li><li><a class="is-flex" href="#MAB-Problem-definition"><span class="mr-2">4</span><span>MAB Problem definition</span></a></li><li><a class="is-flex" href="#Stochastic-Reward-model"><span class="mr-2">5</span><span>Stochastic Reward model</span></a></li><li><a class="is-flex" href="#Performance-Evaluation-Regret"><span class="mr-2">6</span><span>Performance Evaluation: Regret</span></a></li><li><a class="is-flex" href="#Concentration-Bounds"><span class="mr-2">7</span><span>Concentration Bounds</span></a></li><li><a class="is-flex" href="#Markov’s-Inequality"><span class="mr-2">8</span><span>Markov’s Inequality</span></a><ul class="menu-list"><li><a class="is-flex" href="#Lemma"><span class="mr-2">8.1</span><span>Lemma</span></a></li><li><a class="is-flex" href="#Proof"><span class="mr-2">8.2</span><span>Proof</span></a></li></ul></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/%E5%91%BD%E4%BB%A4/"><span class="level-start"><span class="level-item">命令</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><span class="level-start"><span class="level-item">工具使用问题与解决方案</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/"><span class="level-start"><span class="level-item">工具安装及配置</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">数据库</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"><span class="level-start"><span class="level-item">消息队列</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%BA%90%E7%A0%81/"><span class="level-start"><span class="level-item">源码</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">读书笔记</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">课程笔记</span></span><span class="level-end"><span class="level-item tag">18</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E8%BD%AC%E8%BD%BD/"><span class="level-start"><span class="level-item">转载</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E9%BB%91%E7%A7%91%E6%8A%80/"><span class="level-start"><span class="level-item">黑科技</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-10-27T23:55:18.000Z">2020-10-28</time></p><p class="title is-6"><a class="link-muted" href="/2020/10/28/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-08/">CMSC 5728 Decision Analysis &amp; Game Theory - Lecture 08</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-10-23T03:38:11.000Z">2020-10-23</time></p><p class="title is-6"><a class="link-muted" href="/2020/10/23/CMSC-5724-Data-Mining-and-Knowledge-Discovery-Lecture-06/">CMSC 5724 Data Mining and Knowledge Discovery - Lecture 06</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-10-22T08:06:54.000Z">2020-10-22</time></p><p class="title is-6"><a class="link-muted" href="/2020/10/22/%E3%80%90Spring%E6%BA%90%E7%A0%81%E3%80%91IoC%E4%B9%8B%E8%A7%A3%E6%9E%90Bean%EF%BC%9A%E8%A7%A3%E6%9E%90import%E6%A0%87%E7%AD%BE/">【Spring源码】IoC之解析Bean：解析import标签</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E6%BA%90%E7%A0%81/">源码</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-10-20T12:28:45.000Z">2020-10-20</time></p><p class="title is-6"><a class="link-muted" href="/2020/10/20/CMSC-5728-Decision-Analysis-Game-Theory-Lecture-07/">CMSC 5728 Decision Analysis &amp; Game Theory - Lecture 07</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-10-17T07:01:50.000Z">2020-10-17</time></p><p class="title is-6"><a class="link-muted" href="/2020/10/17/CMSC-5724-Data-Mining-and-Knowledge-Discovery-Lecture-05/">CMSC 5724 Data Mining and Knowledge Discovery - Lecture 05</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/">课程笔记</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">16</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/08/"><span class="level-start"><span class="level-item">八月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Homebrew/"><span class="tag">Homebrew</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Java/"><span class="tag">Java</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Kafka/"><span class="tag">Kafka</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MacOS/"><span class="tag">MacOS</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Spring/"><span class="tag">Spring</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%B3%E7%AD%96%E8%AE%BA%E4%B8%8E%E5%8D%9A%E5%BC%88%E8%AE%BA/"><span class="tag">决策论与博弈论</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BB%8F%E9%AA%8C/"><span class="tag">工程师经验</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%8F%91%E7%8E%B0/"><span class="tag">数据挖掘与知识发现</span><span class="tag is-grey-lightest">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tag">服务器</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BD%91%E7%BB%9C%E4%B8%8E%E7%BD%91%E9%A1%B5%E7%BC%96%E7%A8%8B/"><span class="tag">网络与网页编程</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="tag">设计模式</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"><span class="tag">项目管理</span><span class="tag is-grey-lightest">2</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Mike&#039;s Blog" height="28"></a><p class="size-small"><span>&copy; 2020 VONSYLVIA</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">共<span id="busuanzi_value_site_uv">0</span>个访客</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            site: {
+                url: 'http://yoursite.com',
+                external_link: {"enable":true,"exclude":[]}
+            },
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
